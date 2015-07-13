@@ -6,6 +6,8 @@ import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.Response;
 
+import org.jboss.resteasy.util.Base64;
+
 public class SecurityInterceptor implements ContainerRequestFilter {
 
         @Override
@@ -14,12 +16,13 @@ public class SecurityInterceptor implements ContainerRequestFilter {
 		return;
 	    }
 	    else if ("POST".equalsIgnoreCase(requestContext.getMethod())) {
-		String user = "ali";
-		String pass = "123123";
-		String desiredAuthKey = user + pass;
+		String user = "admin";
+		String pass = "123";
+		String desiredAuthKey = Base64.encodeBytes((user +":"+ pass).getBytes());
+		String desiredAuthStr = "Basic " + desiredAuthKey;
 		for (String key : requestContext.getHeaders().keySet()) {
-		        if ("authkey".equalsIgnoreCase(key) && requestContext.getHeaders().get(key) != null
-				&& requestContext.getHeaders().get(key).contains(desiredAuthKey)) {
+		        if ("Authorization".equalsIgnoreCase(key) && requestContext.getHeaders().get(key) != null
+				&& requestContext.getHeaders().get(key).contains(desiredAuthStr)) {
 			    return;
 		        }
 		}

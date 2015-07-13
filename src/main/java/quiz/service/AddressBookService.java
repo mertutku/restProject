@@ -7,33 +7,33 @@ import quiz.model.AddressBookItem;
 
 public class AddressBookService {
 
-        private List<AddressBookItem> items = new ArrayList();
+	private List<AddressBookItem> items = new ArrayList<AddressBookItem>();
 
-        public AddressBookService() {
-	    items.add(new AddressBookItem("mert", "address1"));
-	    items.add(new AddressBookItem("miray", "address2"));
-        }
+	public AddressBookService() {
+		items.add(new AddressBookItem("mert", "address1"));
+		items.add(new AddressBookItem("miray", "address2"));
+	}
 
-        public List<AddressBookItem> list() {
-	    return items;
-        }
+	public List<AddressBookItem> list() {
+		return items;
+	}
 
-        public void add(String name, String address) {
-	    items.add(new AddressBookItem(name, address));
-        }
+	public boolean add(String name, String address) {
+		return items.add(new AddressBookItem(name, address));
+	}
 
-        public boolean update(String name, String address) {
-	    for (AddressBookItem item : items) {
-		if (item.name.equals(name)) {
-		        item.address = address;
-		        return true;
+	public boolean update(String name, String address) {
+		for (AddressBookItem item : items) {
+			if (item.name.equals(name)) {
+				item.address = address;
+				return true;
+			}
 		}
-	    }
-	    return false;
+		return false;
 
-        }
+	}
 
-        public boolean delete(String name) {
-	    return items.remove(new AddressBookItem(name, null));
-        }
+	public boolean delete(String name) {
+		return items.remove(new AddressBookItem(name, null));
+	}
 }

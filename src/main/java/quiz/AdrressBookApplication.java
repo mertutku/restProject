@@ -13,7 +13,7 @@ public class AdrressBookApplication extends Application {
 
         @Override
         public Set<Class<?>> getClasses() {
-	    Set<Class<?>> controllers = new HashSet();
+	    Set<Class<?>> controllers = new HashSet<Class<?>>();
 	    controllers.add(AddressBookController.class);
 	    controllers.add(SecurityInterceptor.class);
 	    return controllers;

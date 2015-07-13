@@ -3,6 +3,7 @@ package quiz.controller;
 import java.util.List;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -23,19 +24,19 @@ public class AddressBookController {
 	    return SERVICE.list();
         }
 
-        @GET
+        @POST
         @Path("/add")
-        public void add(@QueryParam("name") String name, @QueryParam("address") String address) {
-	    SERVICE.add(name, address);
+        public boolean add(@QueryParam("name") String name, @QueryParam("address") String address) {
+        return SERVICE.add(name, address);
         }
 
-        @GET
+        @POST
         @Path("/delete")
         public boolean deleteByName(@QueryParam("name") String name) {
 	    return SERVICE.delete(name);
         }
 
-        @GET
+        @POST
         @Path("/update")
         public boolean updateByName(@QueryParam("name") String name, @QueryParam("address") String address) {
 	    return SERVICE.update(name, address);
